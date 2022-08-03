@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head>
+    <title>Users List</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div layout:fragment="content" class="row">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-5">
+            <h2>UnAvailable Cars</h2>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-12">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="table-responsive">
+                <table class="table table-hover" id="product-table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>User Name</th>
+                        <th>Password</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.username}"></td>
+                        <td th:text="${user.password}"></td>
+                        <td><a th:href="@{'/user/delete/' + ${user.id}}" class="btn btn-danger">Delete</a></td>
+                        <td><a th:href="@{'/user/details/' + ${user.id}}" class="btn btn-default">Details</a></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div th:replace="Shared/footer :: footer"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
