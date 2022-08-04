@@ -4,11 +4,80 @@
     <title>DashBoard</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div th:replace="Shared/header :: header"></div>
+<div>
+    <table hidden class="table table-hover" id="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>voltage</th>
+            <th>Password</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="item" th:each="s : ${statistics}">
+            <td class="voltage" th:text="${s.voltage}"></td>
+            <td class="ampere" th:text="${s.ampere}"></td>
+            <td class="catchTime" th:text="${s.catchTime}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<canvas id="myChart" hidden style="width:100%;max-width:600px"></canvas>
+
+<script>
 
 
+      var v = [];
+      var a = [];
+      var cd = [];
+      var i =0;
+      var t = document.getElementById('table');
+
+      $("#table tr").each(function() {
+          var val1 = $(t.rows[i].cells[0]).text();
+          var val2 = $(t.rows[i].cells[1]).text();
+          var val3 = $(t.rows[i].cells[2]).text();
+          v.push(val1)
+          a.push(val2)
+          cd.push(val3)
+          i++;
+      });
+      v.shift()
+      a.shift()
+      cd.shift()
+
+    new Chart("myChart", {
+        type: "line",
+        data: {
+            labels: cd,
+            datasets: [{
+                label: 'voltage',
+                data: v,
+                borderColor: "red",
+                fill: false
+            }, {
+                label: 'ampere',
+                data: a,
+                borderColor: "green",
+                fill: false
+            } ]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{ticks: {min: 1, max:100}}],
+            }
+        }
+    });
+
+</script>
 
 <div th:replace="Shared/footer :: footer"></div>
 

@@ -9,13 +9,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </head>
 <body>
+<div th:replace="Shared/header :: header"></div>
 <div layout:fragment="content" align="center">
     <h1>Add User</h1>
     <br />
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <form action="#" th:action="@{/user/save}" th:object="${user}"
+            <form action="#" th:action="@{/auth/registerUser}" th:object="${user}"
                   method="post">
                 <div class="row">
                     <div class="col-md-3">
@@ -34,6 +35,29 @@
                     <div class="col-md-9">
                         <div class="form-group">
                             <input type="password" class="form-control" th:field="*{password}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="control-label"> Email:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <input type="email" class="form-control" th:field="*{email}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="control-label">User type:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <select id="type" th:field="*{type}" class="form-control">
+                                <option value="USER">USER</option>
+                                <option value="ADMIN">ADMIN</option>
+                            </select>
                         </div>
                     </div>
                 </div>

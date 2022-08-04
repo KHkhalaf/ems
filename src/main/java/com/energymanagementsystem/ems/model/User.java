@@ -5,6 +5,8 @@ import java.util.*;
 
 import com.energymanagementsystem.ems.dto.UserSummary;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -49,7 +51,8 @@ public class User implements Serializable {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name="company_id", nullable=false)
+    @ColumnDefault("-1")
+    @JoinColumn(name="company_id")
     private Company company;
 
     @OneToMany(mappedBy="user")

@@ -16,8 +16,8 @@ public class Statistics {
     @Column(name = "statistics_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Long voltage;
-    private Long ampere;
+    private int voltage;
+    private int ampere;
     private String catchTime;
 
     @ManyToOne

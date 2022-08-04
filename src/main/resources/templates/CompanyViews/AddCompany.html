@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>User Profile</title>
+    <meta charset="utf-8" />
+    <title>Add Company</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -10,60 +11,51 @@
 <body>
 <div th:replace="Shared/header :: header"></div>
 <div layout:fragment="content" align="center">
-    <h1>Details User</h1>
+    <h1>Add User</h1>
     <br />
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <form action="#" th:object="${user}">
-                <input type="hidden" th:field="*{id}" />
+            <form action="#" th:action="@{/company/save}" th:object="${company}"
+                  method="post">
                 <div class="row">
                     <div class="col-md-3">
-                        User Name:
+                        <label class="control-label">Company Name:</label>
                     </div>
                     <div class="col-md-9">
                         <div class="form-group">
-                            <label class="control-label" th:text="*{username}"></label>
+                            <input type="text" class="form-control" th:field="*{name}"/>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        Password:
+                        <label class="control-label"> Location:</label>
                     </div>
                     <div class="col-md-9">
                         <div class="form-group">
-                            <label class="control-label" th:text="*{password}"></label>
+                            <input type="password" class="form-control" th:field="*{location}"/>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        Email:
+                        <label class="control-label"> Location:</label>
                     </div>
                     <div class="col-md-9">
                         <div class="form-group">
-                            <label class="control-label" th:text="*{email}"></label>
+                            <input type="password" class="form-control" th:field="*{location}"/>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        Type
-                    </div>
-                    <div class="col-md-9">
-                        <div class="form-group">
-                            <label class="control-label" th:text="*{type}"></label>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary"> Save</button>
                 </div>
-                <a class="btn btn-default" href="/company/home">Back </a>
             </form>
         </div>
     </div>
 </div>
 </div>
-
 <div th:replace="Shared/footer :: footer"></div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

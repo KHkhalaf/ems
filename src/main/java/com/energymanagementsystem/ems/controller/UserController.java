@@ -2,16 +2,17 @@ package com.energymanagementsystem.ems.controller;
 
 import com.energymanagementsystem.ems.exceptions.ResourceNotFoundException;
 import com.energymanagementsystem.ems.helper.UserService;
+import com.energymanagementsystem.ems.model.Statistics;
+import com.energymanagementsystem.ems.model.dataset;
 import com.energymanagementsystem.ems.repository.StatisticsRepository;
 import com.energymanagementsystem.ems.model.User;
 import com.energymanagementsystem.ems.dto.*;
+import com.energymanagementsystem.ems.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -25,12 +26,14 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private StatisticsRepository statisticsRepository;
+    private StatisticsService statisticsService;
 
-    @RequestMapping("/dashboard")
-    public ModelAndView dashboard() {
+    @RequestMapping("/dashboard/{id}")
+    public ModelAndView dashboard(@PathVariable(name = "id") int id) throws ResourceNotFoundException {
         ModelAndView modelAndView = new ModelAndView("UserViews/dashboard");
-        //modelAndView.addObject();
+        ArrayList<dataset> statistics = statisticsService.getStatisticsByUserId(id);
+        //StatisticsDto statisticsDto = new StatisticsDto(statistics);
+        modelAndView.addObject("statistics",statistics);
         return modelAndView;
     }
 
@@ -72,17 +75,5 @@ public class UserController {
         userService.delete(id);
         return "redirect:/user/list";
     }
-    @RequestMapping(value = "/loginPage")
-    public ModelAndView showLoginPage(LoginRequest loginRequest) {
-        ModelAndView mav = new ModelAndView("UserViews/login");
-        mav.addObject("loginRequest",loginRequest);
-        return mav;
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login() {
-        return "redirect:/shared/login";
-    }
-
 
 }

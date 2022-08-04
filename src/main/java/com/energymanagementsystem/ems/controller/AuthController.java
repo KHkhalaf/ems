@@ -51,7 +51,7 @@ public class AuthController {
 
     @RequestMapping(value = "/register")
     public ModelAndView showRegisterPage(User user) {
-        ModelAndView mav = new ModelAndView("UserViews/register");
+        ModelAndView mav = new ModelAndView("UserViews/AddUser");
         mav.addObject("user",user);
         return mav;
     }

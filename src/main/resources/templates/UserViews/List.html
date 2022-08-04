@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </head>
 <body>
+<div th:replace="Shared/header :: header"></div>
 <div layout:fragment="content" class="row">
     <div class="row">
         <div class="col-md-4"></div>
@@ -40,6 +41,7 @@
                         <td th:text="${user.type}"></td>
                         <td><a th:href="@{'/user/delete/' + ${user.id}}" class="btn btn-danger">Delete</a></td>
                         <td><a th:href="@{'/user/details/' + ${user.id}}" class="btn btn-default">Details</a></td>
+                        <td><a th:href="@{'/user/dashboard/' + ${user.id}}" class="btn btn-default">Analysis</a></td>
                         <td></td>
                     </tr>
                     </tbody>
